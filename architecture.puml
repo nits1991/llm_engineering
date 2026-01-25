@@ -1,0 +1,61 @@
+@startuml
+skinparam rectangle {
+    BackgroundColor<<component>> LightBlue
+    BackgroundColor<<service>> LightGreen
+    BackgroundColor<<data>> LightYellow
+    BackgroundColor<<external>> LightPink
+}
+
+title AI Copywriting + Strategy Assistant Architecture
+
+' Components
+rectangle "User Interface" <<component>> #AAAAFF
+rectangle "LLM Gateway" <<component>> #AAFFAA
+rectangle "Cognitive Layer" <<component>> #FFAAFF
+rectangle "Data Store" <<data>> #FFFFAA
+rectangle "External Integrations" <<external>> #FFAAAA
+
+' Services (optional, for clarity)
+rectangle "Copy Generator" <<service>> #AAFFAA
+rectangle "Strategy Engine" <<service>> #FFAAFF
+rectangle "Memory Manager" <<service>> #FFFFAA
+
+' Relationships
+"User Interface" --> "LLM Gateway" : Requests copy
+"User Interface" --> "Cognitive Layer" : Sets goals / preferences
+
+"LLM Gateway" --> "Copy Generator" : Generate text
+"Copy Generator" --> "Data Store" : Save draft / history
+
+"Cognitive Layer" --> "Strategy Engine" : Plan content calendar
+"Strategy Engine" --> "Data Store" : Read past performance
+"Strategy Engine" --> "External Integrations" : Post to social/email
+
+"Cognitive Layer" --> "Memory Manager" : Store user context
+"Memory Manager" --> "Data Store" : Persist memory
+
+' External connections
+"External Integrations" --> "Social APIs (Twitter, LinkedIn)" 
+"External Integrations" --> "Email (Mailchimp, SendGrid)"
+"External Integrations" --> "Notion/Airtable (for storage)"
+
+' Notes
+note right of "User Interface"
+  Web/Mobile App
+  - Input: Goal, tone, audience
+  - Output: Drafts, calendar, suggestions
+end note
+
+note right of "Cognitive Layer"
+  - Tracks user preferences
+  - Learns what worked
+  - Suggests next steps
+end note
+
+note right of "Data Store"
+  - User profile
+  - Past campaigns
+  - Generated content
+  - Feedback scores
+end note
+@enduml

@@ -1,0 +1,484 @@
+{
+  "info": {
+    "name": "OpenAI API Collection",
+    "description": "Complete collection of OpenAI API endpoints for testing and development",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Chat Completions",
+      "item": [
+        {
+          "name": "Basic Chat Completion",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{OPENAI_API_KEY}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"gpt-4o-mini\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a helpful assistant.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"What is the capital of France?\"\n    }\n  ],\n  \"temperature\": 0.7,\n  \"max_tokens\": 150\n}"
+            },
+            "url": {
+              "raw": "https://api.openai.com/v1/chat/completions",
+              "protocol": "https",
+              "host": ["api", "openai", "com"],
+              "path": ["v1", "chat", "completions"]
+            },
+            "description": "Basic chat completion with GPT-4o-mini"
+          }
+        },
+        {
+          "name": "Chat with System Prompt",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{OPENAI_API_KEY}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"gpt-4o-mini\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a technical expert who explains complex concepts in simple terms. Use analogies when helpful.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Explain what an API is to a 10-year-old.\"\n    }\n  ],\n  \"temperature\": 0.8\n}"
+            },
+            "url": {
+              "raw": "https://api.openai.com/v1/chat/completions",
+              "protocol": "https",
+              "host": ["api", "openai", "com"],
+              "path": ["v1", "chat", "completions"]
+            },
+            "description": "Chat completion with custom system prompt"
+          }
+        },
+        {
+          "name": "Multi-turn Conversation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{OPENAI_API_KEY}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"gpt-4o-mini\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a helpful coding assistant.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Write a Python function to calculate fibonacci numbers.\"\n    },\n    {\n      \"role\": \"assistant\",\n      \"content\": \"Here's a Python function to calculate Fibonacci numbers:\\n\\n```python\\ndef fibonacci(n):\\n    if n <= 1:\\n        return n\\n    return fibonacci(n-1) + fibonacci(n-2)\\n```\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Can you make it more efficient using memoization?\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "https://api.openai.com/v1/chat/completions",
+              "protocol": "https",
+              "host": ["api", "openai", "com"],
+              "path": ["v1", "chat", "completions"]
+            },
+            "description": "Example of multi-turn conversation with context"
+          }
+        },
+        {
+          "name": "JSON Mode Response",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{OPENAI_API_KEY}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"gpt-4o-mini\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a helpful assistant that outputs JSON.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Generate a user profile with name, age, and hobbies in JSON format.\"\n    }\n  ],\n  \"response_format\": { \"type\": \"json_object\" }\n}"
+            },
+            "url": {
+              "raw": "https://api.openai.com/v1/chat/completions",
+              "protocol": "https",
+              "host": ["api", "openai", "com"],
+              "path": ["v1", "chat", "completions"]
+            },
+            "description": "Force response to be valid JSON"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Embeddings",
+      "item": [
+        {
+          "name": "Create Embedding",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{OPENAI_API_KEY}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"text-embedding-3-small\",\n  \"input\": \"The quick brown fox jumps over the lazy dog\"\n}"
+            },
+            "url": {
+              "raw": "https://api.openai.com/v1/embeddings",
+              "protocol": "https",
+              "host": ["api", "openai", "com"],
+              "path": ["v1", "embeddings"]
+            },
+            "description": "Generate embeddings for semantic search"
+          }
+        },
+        {
+          "name": "Batch Embeddings",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{OPENAI_API_KEY}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"text-embedding-3-small\",\n  \"input\": [\n    \"Machine learning is a subset of artificial intelligence\",\n    \"Deep learning uses neural networks with multiple layers\",\n    \"Natural language processing helps computers understand human language\"\n  ]\n}"
+            },
+            "url": {
+              "raw": "https://api.openai.com/v1/embeddings",
+              "protocol": "https",
+              "host": ["api", "openai", "com"],
+              "path": ["v1", "embeddings"]
+            },
+            "description": "Generate embeddings for multiple texts at once"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Images (DALL-E)",
+      "item": [
+        {
+          "name": "Generate Image",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{OPENAI_API_KEY}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"dall-e-3\",\n  \"prompt\": \"A serene landscape with mountains and a lake at sunset, digital art style\",\n  \"size\": \"1024x1024\",\n  \"quality\": \"standard\",\n  \"n\": 1\n}"
+            },
+            "url": {
+              "raw": "https://api.openai.com/v1/images/generations",
+              "protocol": "https",
+              "host": ["api", "openai", "com"],
+              "path": ["v1", "images", "generations"]
+            },
+            "description": "Generate an image using DALL-E 3"
+          }
+        },
+        {
+          "name": "Generate HD Image",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{OPENAI_API_KEY}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"dall-e-3\",\n  \"prompt\": \"A futuristic city with flying cars, neon lights, cyberpunk aesthetic\",\n  \"size\": \"1792x1024\",\n  \"quality\": \"hd\",\n  \"n\": 1\n}"
+            },
+            "url": {
+              "raw": "https://api.openai.com/v1/images/generations",
+              "protocol": "https",
+              "host": ["api", "openai", "com"],
+              "path": ["v1", "images", "generations"]
+            },
+            "description": "Generate high-quality image in landscape format"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Audio",
+      "item": [
+        {
+          "name": "Text-to-Speech",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{OPENAI_API_KEY}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"tts-1\",\n  \"input\": \"Hello! This is a test of OpenAI's text-to-speech API. It sounds quite natural, doesn't it?\",\n  \"voice\": \"alloy\"\n}"
+            },
+            "url": {
+              "raw": "https://api.openai.com/v1/audio/speech",
+              "protocol": "https",
+              "host": ["api", "openai", "com"],
+              "path": ["v1", "audio", "speech"]
+            },
+            "description": "Convert text to speech. Note: Use 'Send and Download' to save the audio file."
+          }
+        },
+        {
+          "name": "Text-to-Speech HD",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{OPENAI_API_KEY}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"tts-1-hd\",\n  \"input\": \"This is high-quality audio output from OpenAI's text-to-speech API.\",\n  \"voice\": \"nova\",\n  \"response_format\": \"mp3\"\n}"
+            },
+            "url": {
+              "raw": "https://api.openai.com/v1/audio/speech",
+              "protocol": "https",
+              "host": ["api", "openai", "com"],
+              "path": ["v1", "audio", "speech"]
+            },
+            "description": "High-quality text-to-speech with different voice"
+          }
+        },
+        {
+          "name": "Speech-to-Text (Transcription)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{OPENAI_API_KEY}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/path/to/audio.mp3",
+                  "description": "Upload your audio file here"
+                },
+                {
+                  "key": "model",
+                  "value": "whisper-1",
+                  "type": "text"
+                },
+                {
+                  "key": "language",
+                  "value": "en",
+                  "type": "text",
+                  "description": "Optional: ISO-639-1 language code"
+                }
+              ]
+            },
+            "url": {
+              "raw": "https://api.openai.com/v1/audio/transcriptions",
+              "protocol": "https",
+              "host": ["api", "openai", "com"],
+              "path": ["v1", "audio", "transcriptions"]
+            },
+            "description": "Transcribe audio to text. Upload an audio file in the Body > form-data section."
+          }
+        },
+        {
+          "name": "Speech-to-Text (Translation)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{OPENAI_API_KEY}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/path/to/audio.mp3",
+                  "description": "Upload your audio file here"
+                },
+                {
+                  "key": "model",
+                  "value": "whisper-1",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "https://api.openai.com/v1/audio/translations",
+              "protocol": "https",
+              "host": ["api", "openai", "com"],
+              "path": ["v1", "audio", "translations"]
+            },
+            "description": "Translate audio in any language to English text"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Moderations",
+      "item": [
+        {
+          "name": "Check Content Safety",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{OPENAI_API_KEY}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"text-moderation-latest\",\n  \"input\": \"I want to test if this content is appropriate.\"\n}"
+            },
+            "url": {
+              "raw": "https://api.openai.com/v1/moderations",
+              "protocol": "https",
+              "host": ["api", "openai", "com"],
+              "path": ["v1", "moderations"]
+            },
+            "description": "Check if content violates OpenAI's usage policies"
+          }
+        },
+        {
+          "name": "Batch Moderation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{OPENAI_API_KEY}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"text-moderation-latest\",\n  \"input\": [\n    \"This is a normal message.\",\n    \"Another safe message for testing.\",\n    \"Testing content moderation API.\"\n  ]\n}"
+            },
+            "url": {
+              "raw": "https://api.openai.com/v1/moderations",
+              "protocol": "https",
+              "host": ["api", "openai", "com"],
+              "path": ["v1", "moderations"]
+            },
+            "description": "Check multiple texts for content safety"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Models",
+      "item": [
+        {
+          "name": "List All Models",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{OPENAI_API_KEY}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.openai.com/v1/models",
+              "protocol": "https",
+              "host": ["api", "openai", "com"],
+              "path": ["v1", "models"]
+            },
+            "description": "Get list of all available models"
+          }
+        },
+        {
+          "name": "Get Model Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{OPENAI_API_KEY}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.openai.com/v1/models/gpt-4o-mini",
+              "protocol": "https",
+              "host": ["api", "openai", "com"],
+              "path": ["v1", "models", "gpt-4o-mini"]
+            },
+            "description": "Get details about a specific model"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "OPENAI_API_KEY",
+      "value": "your-api-key-here",
+      "type": "string"
+    }
+  ]
+}
